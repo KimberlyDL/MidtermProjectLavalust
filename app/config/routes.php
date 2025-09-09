@@ -1,5 +1,5 @@
 <?php
-defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+defined('PREVENT_DIRECT_ACCESS') or exit('No direct script access allowed');
 /**
  * ------------------------------------------------------------------
  * LavaLust - an opensource lightweight PHP MVC Framework
@@ -43,4 +43,49 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 */
 
-$router->get('/', 'Welcome::index');
+// SYNTAX
+// php console/cli.php make:model UserModel
+// php console/cli.php make:view View
+
+// $router->get('/', 'Welcome::index');
+// $router->get('/about-us', 'Welcome::showpage');
+// $router->get('/about-us', 'Welcome@showpage');
+// $router->get('/about-us', 'Welcome->showpage');
+
+
+
+
+// ROUTES ACTIVITY
+// $router->get('/', 'Welcome::index');
+// $router->get('/get-id/{id}/{name}', 'Welcome->get_id');
+// $router->get('/profile/{fname}/{lname}', 'Welcome->profile');
+
+
+//CRUD ACTIVITY
+// $router->get('students/get-all', 'StudentsController::get_all');
+// $router->get('students/create', 'StudentsController::create');
+// $router->get('students/update', 'StudentsController::update');
+// $router->get('students/delete', 'StudentsController::delete');
+
+
+$router->get('/', 'Auth');
+$router->get('/home', 'Home');
+$router->group('/auth', function () use ($router) {
+    $router->match('/register', 'Auth::register', ['POST', 'GET']);
+    $router->match('/login', 'Auth::login', ['POST', 'GET']);
+    $router->get('/logout', 'Auth::logout');
+    $router->match('/password-reset', 'Auth::password_reset', ['POST', 'GET']);
+    $router->match('/set-new-password', 'Auth::set_new_password', ['POST', 'GET']);
+    $router->get('/verify/{token}', 'Auth::verify');
+    $router->get('/not-verified', 'Auth::not_verified');
+    $router->post('/resend-verification', 'Auth::resend_verification');
+});
+
+//seeder
+$router->get('/users/seed', 'UsersController->seed');
+
+$router->get('/users', 'UsersController->read');
+$router->match('/users/create', 'UsersController->insert', 'GET|POST');
+$router->match('/users/{id}/edit', 'UsersController->edit', 'GET|POST');
+$router->get('/users/{id}', 'UsersController->show');
+$router->post('/users/{id}/delete', 'UsersController->delete');

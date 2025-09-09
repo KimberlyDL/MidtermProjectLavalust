@@ -79,7 +79,7 @@ $config['ENVIRONMENT']             = 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= '';
+$config['base_url'] 				= 'http://localhost:8080/';
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +90,8 @@ $config['base_url'] 				= '';
 | variable to blank.
 |
 */
-$config['index_page']               = 'index.php';
+// $config['index_page']               = 'index.php';
+$config['index_page']               = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,7 @@ $config['index_page']               = 'index.php';
 |   3 = All
 |
 */
+// $config['log_threshold']            = 3;
 $config['log_threshold']            = 0;
 $config['log_dir']                  = 'runtime/logs/';
 
